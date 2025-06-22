@@ -1,0 +1,45 @@
+
+* BUG: fetch_address_credits_from_full_node, missing param
+
+* BUG[?]: what if full node connection fails on App() init? review
+
+* Add BTC and sats denominations for custom amount
+
+* Homepage: make DONATE more visible (user feedback)
+
+* Homepage: make GITHUB more visible (user feedback)
+
+* Consider decreasing log/stats/interval as 10 seconds was reported as too verbose by the user
+
+* The charge_payment_timeout_in_minutes should be propagated and used in LN invoice creation to also enforce it on the invoice level
+
+* Cancelled LN charges should propagate cancellation to LND (the invoice should be cancelled)
+
+* BUG: 0.01 Won goes below 1 satoshi and causes server error on sanity assertion
+
+* BUG: charge_expired_to_complete__paid.jinja2 - no support for expired + confirmed + underpaid
+  - underpaid and expired to pay is mistakenly presented as "we noticed your payment but it failed to confirm" while it should stress underpayment
+
+* BUG: should validate total is not smaller than 10**-8 (because that is our assumed db precision)
+  test case: 0.01 Won paid in BTC is below 1 satoshi and blows this: assert self.cc_total
+
+* BUG: favicon.ico is not cached and always fetched (200 instead of 304)
+
+* Add time exponential randomized skipping of (unsuccessful) callbacks
+
+* Add log level to user config
+
+* Consider next blockchain height being lower than current one
+  - should height be updated to lower?
+  - should charge confirmations should be updated to lower?
+  - should charge payment and business statuses be updated to lower?
+
+* Consider consensus forks
+
+* Centralize VERSION tag
+
+* Update bulma to these (css, css.map, min.css):
+  https://github.com/jgthms/bulma/tree/master/css
+
+* Maybe specify getcontext().prec = 18+18  # For example one ETH Wei is 10**-18
+  See: https://docs.python.org/2/library/decimal.html#decimal.localcontext
